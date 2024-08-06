@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Container } from "../../types/container.type";
 import EditContainerComponent from "./EditContainer";
 import DeleteContainerComponent from "./DeleteContainer";
@@ -11,7 +10,7 @@ const CardContainerComponent = ({ container }: { container: Container }) => {
 
   return (
     <>
-      <Link
+      <a
         href={`/create/${container.id}`}
         className="flex justify-between p-2 md:p-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-2xl"
       >
@@ -35,7 +34,7 @@ const CardContainerComponent = ({ container }: { container: Container }) => {
             handleButtonClick={handleButtonClick}
           />
         </div>
-      </Link>
+      </a>
     </>
   );
 };

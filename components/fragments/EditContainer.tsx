@@ -64,7 +64,7 @@ const EditContainerComponent = ({
       >
         Edit
       </button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>

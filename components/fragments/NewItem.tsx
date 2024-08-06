@@ -82,7 +82,7 @@ const AddNewItem = () => {
       >
         <CirclePlus /> New Item
       </button>
-      <Modal placement="center" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal placement="top-center" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>

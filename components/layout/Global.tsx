@@ -13,7 +13,7 @@ export default function GlobalLayout({
   children: React.ReactNode;
 }) {
   const pathName = usePathname();
-  const shouldRenderNavigation = !pathName.includes("/create/write-");
+  const shouldRenderNavigation = !pathName.includes("/create/") && !pathName.includes("/ai");
 
   return (
     <>

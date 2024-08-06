@@ -73,7 +73,7 @@ const EditItem = ({
 
   return (
     <>
-      <Modal placement="center" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal placement="top-center" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
