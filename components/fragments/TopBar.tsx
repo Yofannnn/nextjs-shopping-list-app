@@ -19,7 +19,7 @@ const TopBarComponent = ({ containerId }: { containerId: string }) => {
 
   return (
     <>
-      <div className="fixed top-0 h-[65px] w-full flex items-center px-5 backdrop-blur bg-white[.2] dark:bg-black[.2] z-50">
+      <div className="fixed top-0 h-[65px] w-full flex items-center px-5 backdrop-blur bg-background[.2] z-50">
         <Link href="/create">
           <ChevronLeft className="size-7" />
         </Link>

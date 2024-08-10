@@ -64,7 +64,12 @@ const EditContainerComponent = ({
       >
         Edit
       </button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="top-center"
+        className="bg-background"
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -77,6 +82,7 @@ const EditContainerComponent = ({
                     <Input
                       type="text"
                       variant="bordered"
+                      color="primary"
                       label="Enter new title"
                       isInvalid={inputInvalid}
                       errorMessage="Please enter a valid title"

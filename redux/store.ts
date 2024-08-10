@@ -8,6 +8,7 @@ import redoReducer from "./slice/redo.slice";
 import trashReducer from "./slice/trash.slice";
 import sortReducer from "./slice/sort.slice";
 import currencyReducer from "./slice/currency.slice";
+import colorThemeReducer from "./slice/color.slice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     trash: trashReducer,
     sort: sortReducer,
     currency: currencyReducer,
+    colorTheme: colorThemeReducer,
   },
 });
 

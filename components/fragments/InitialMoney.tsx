@@ -56,7 +56,12 @@ const InitialMoneyComponent = () => {
         <HandCoins />
         Initial Money
       </button>
-      <Modal placement="top-center" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        className="bg-background"
+        placement="top-center"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -69,11 +74,13 @@ const InitialMoneyComponent = () => {
                     <Input
                       type="number"
                       variant="bordered"
+                      color="primary"
                       label="Enter Initial Money"
                       value={inputInitialMoney.toString()}
                       onChange={(e) =>
                         setInputInitialMoney(Number(e.target.value))
                       }
+                      autoFocus
                     />
                   </div>
                   <ModalFooter>

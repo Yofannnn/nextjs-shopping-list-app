@@ -96,6 +96,7 @@ const AddNewItemsFromAiComponent = ({
         onOpenChange={onOpenChange}
         placement="top-center"
         scrollBehavior="inside"
+        className="bg-background"
         isDismissable={false}
       >
         <ModalContent>

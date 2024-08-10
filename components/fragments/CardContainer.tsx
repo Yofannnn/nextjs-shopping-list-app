@@ -12,7 +12,7 @@ const CardContainerComponent = ({ container }: { container: Container }) => {
     <>
       <a
         href={`/create/${container.id}`}
-        className="flex justify-between p-2 md:p-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-2xl"
+        className="flex justify-between p-2 md:p-3 hover:bg-background rounded-2xl"
       >
         <div>
           <h2 className="text-sm md:text-lg">{container.title}</h2>

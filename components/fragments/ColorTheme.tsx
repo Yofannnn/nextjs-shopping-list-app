@@ -12,19 +12,20 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
-import { useTheme } from "next-themes";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
 import { Selection } from "@react-types/shared";
+import { setColorThemeToLocalStorage } from "../../redux/slice/color.slice";
 
-const ThemeSelectorComponent = () => {
+const ColorThemeComponent = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   return (
     <>
       <button
         className="w-full pl-4 text-start py-4 text-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
         onClick={onOpen}
       >
-        Themes
+        Color Theme
       </button>
       <Modal
         size="xs"
@@ -37,7 +38,7 @@ const ThemeSelectorComponent = () => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Select Theme
+                Choose the color you want
               </ModalHeader>
               <ModalBody>
                 <ListboxComponent />
@@ -55,19 +56,20 @@ const ThemeSelectorComponent = () => {
   );
 };
 
-export default ThemeSelectorComponent;
+export default ColorThemeComponent;
 
 const ListboxComponent = () => {
-  const { theme, setTheme } = useTheme();
+  const dispatch: AppDispatch = useDispatch();
+  const { colorTheme } = useSelector((state: RootState) => state.colorTheme);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(
-    new Set([`${theme}`])
+    new Set([colorTheme])
   );
 
   const handleSelectionChange = (keys: Selection) => {
     const selected = new Set<string>(keys as Set<string>);
     setSelectedKeys(selected);
-    const selectedTheme = Array.from(selected).join(", ");
-    setTheme(selectedTheme);
+    const selectedSort = Array.from(selected).join(", ");
+    dispatch(setColorThemeToLocalStorage(selectedSort));
   };
 
   return (
@@ -81,8 +83,12 @@ const ListboxComponent = () => {
           selectedKeys={selectedKeys}
           onSelectionChange={handleSelectionChange}
         >
-          <ListboxItem key="dark">Dark</ListboxItem>
-          <ListboxItem key="light">Light</ListboxItem>
+          <ListboxItem key="default">Default</ListboxItem>
+          <ListboxItem key="green">Green</ListboxItem>
+          <ListboxItem key="orange">Orange</ListboxItem>
+          <ListboxItem key="yellow">Yellow</ListboxItem>
+          <ListboxItem key="violet">Violet</ListboxItem>
+          <ListboxItem key="blue">Blue</ListboxItem>
         </Listbox>
       </div>
     </div>

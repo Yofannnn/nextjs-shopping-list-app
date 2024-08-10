@@ -53,7 +53,11 @@ const TotalComponent = () => {
         <Scroll />
         Total
       </button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        className="bg-background"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>

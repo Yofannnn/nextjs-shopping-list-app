@@ -1,3 +1,4 @@
+import ColorThemeComponent from "../../../components/fragments/ColorTheme";
 import FormatCurrencyComponent from "../../../components/fragments/FormatCurrency";
 import SortItemsComponent from "../../../components/fragments/SortItems";
 import ThemeSelectorComponent from "../../../components/fragments/ThemeSelector";
@@ -12,6 +13,7 @@ export default function SettingPage() {
             <ThemeSelectorComponent />
             <SortItemsComponent />
             <FormatCurrencyComponent />
+            <ColorThemeComponent />
           </div>
         </div>
       </div>

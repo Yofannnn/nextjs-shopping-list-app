@@ -38,6 +38,7 @@ const SortItemsComponent = () => {
         placement="center"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        className="bg-background"
       >
         <ModalContent>
           {(onClose) => (

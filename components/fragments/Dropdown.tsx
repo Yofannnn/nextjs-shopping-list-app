@@ -17,7 +17,7 @@ const DropdownComponent = ({ item }: { item: Item }) => {
 
   return (
     <>
-      <Dropdown backdrop="blur">
+      <Dropdown backdrop="blur" className="bg-popover">
         <DropdownTrigger>
           <button className="p-1.5 rounded-full">
             <svg

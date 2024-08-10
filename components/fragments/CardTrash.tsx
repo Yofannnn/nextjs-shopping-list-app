@@ -16,7 +16,7 @@ const CardTrashComponent = ({ trash }: { trash: Item }) => {
 
   return (
     <>
-      <Card className="w-full my-2">
+      <Card className="w-full my-2 bg-card">
         <CardBody>
           <div className="flex justify-between items-center gap-3 md:gap-4 py-1 md:py-2">
             <div className="w-full">

@@ -82,7 +82,12 @@ const AddNewItem = () => {
       >
         <CirclePlus /> New Item
       </button>
-      <Modal placement="top-center" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        className="bg-background"
+        placement="top-center"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -96,6 +101,7 @@ const AddNewItem = () => {
                       type="text"
                       variant="bordered"
                       label="Enter new items"
+                      color="primary"
                       isInvalid={inputInvalid}
                       errorMessage="Please enter a valid title"
                       onChange={(e) => setInputTitle(e.target.value)}
@@ -105,6 +111,7 @@ const AddNewItem = () => {
                   <div className="flex w-full flex-wrap md:flex-nowrap gap-4 my-6">
                     <Input
                       type="number"
+                      color="primary"
                       variant="bordered"
                       label="Enter the price"
                       onChange={(e) => setInputPrice(Number(e.target.value))}

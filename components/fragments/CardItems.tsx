@@ -16,7 +16,7 @@ const CardItem = ({ item }: { item: Item }) => {
   const formatter = formatCurrency(locale, currencyCode);
 
   return (
-    <Card className="my-2">
+    <Card className="my-2 bg-card">
       <CardBody>
         <div className="flex justify-between items-center gap-3 md:gap-4 py-1 md:py-2">
           <CheckboxItem item={item} />

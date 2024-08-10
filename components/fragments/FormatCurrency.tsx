@@ -41,6 +41,7 @@ const FormatCurrencyComponent = () => {
         placement="center"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        className="bg-background"
       >
         <ModalContent>
           {(onClose) => (

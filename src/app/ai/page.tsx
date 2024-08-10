@@ -78,7 +78,7 @@ const FormInput = ({
     if (wrapper) {
       const newElement = document.createElement("div");
       newElement.className =
-        "max-w-[85%] p-3 sm:p-4 my-4 self-end bg-neutral-900 rounded-2xl sm:rounded-3xl text-sm sm:text-base";
+        "max-w-[85%] p-3 sm:p-4 my-4 self-end bg-card rounded-2xl sm:rounded-3xl text-sm sm:text-base";
       newElement.textContent = prompt;
       wrapper.appendChild(newElement);
     }

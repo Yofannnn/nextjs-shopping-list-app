@@ -73,7 +73,7 @@ const EditItem = ({
 
   return (
     <>
-      <Modal placement="top-center" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal className="bg-background" placement="top-center" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -86,6 +86,7 @@ const EditItem = ({
                     <Input
                       type="text"
                       variant="bordered"
+                      color="primary"
                       label="Enter new title"
                       isInvalid={inputInvalid}
                       errorMessage="Please enter a valid title"
@@ -98,6 +99,7 @@ const EditItem = ({
                     <Input
                       type="number"
                       variant="bordered"
+                      color="primary"
                       label="Enter new price"
                       value={inputPrice.toString()}
                       onChange={(e) => setInputPrice(Number(e.target.value))}
