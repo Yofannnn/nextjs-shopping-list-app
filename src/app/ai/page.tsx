@@ -1,17 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import AddNewItemsFromAiComponent from "@/components/fragments/AddNewItemsFromAi";
 import MarkdownIt from "markdown-it";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { fetchContainer } from "@/redux/slice/container.slice";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function AIPage() {
   const wrapperRef = useRef(null);
   const [itemsAddToContainer, setItemsAddToContainer] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [parent] = useAutoAnimate();
 
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
@@ -22,11 +25,19 @@ export default function AIPage() {
     if (itemsAddToContainer.length !== 0) setIsModalOpen(true);
   }, [itemsAddToContainer]);
 
+  const combinedRef = useCallback(
+    (element: any) => {
+      wrapperRef.current = element;
+      parent(element);
+    },
+    [parent]
+  );
+
   return (
     <>
       <div className="w-full h-calc-screen-minus-80 flex justify-center overflow-y-auto">
         <div
-          ref={wrapperRef}
+          ref={combinedRef}
           className="wrapper-chat w-[95%] sm:w-[80%] md:w-[70%] flex flex-col h-fit"
         >
           {/* main  */}

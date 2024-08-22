@@ -5,10 +5,13 @@ import { CircularProgress } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchContainer } from "@/redux/slice/container.slice";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import CardContainerComponent from "./CardContainer";
 
 const WrapperListContainer = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const [parent] = useAutoAnimate();
 
   useEffect(() => {
     dispatch(fetchContainer());
@@ -38,7 +41,10 @@ const WrapperListContainer = () => {
         className="w-full overflow-y-auto flex justify-center"
         style={{ height: "calc(100svh - 70px)" }}
       >
-        <div className="w-full h-fit md:w-3/5 p-3 md:p-4 mb-16 sm:mb-20">
+        <div
+          ref={parent}
+          className="w-full h-fit md:w-3/5 p-3 md:p-4 mb-16 sm:mb-20"
+        >
           {containers.map((container, i) => (
             <CardContainerComponent key={i} container={container} />
           ))}
