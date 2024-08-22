@@ -1,7 +1,7 @@
-import ColorThemeComponent from "../../../components/fragments/ColorTheme";
-import FormatCurrencyComponent from "../../../components/fragments/FormatCurrency";
-import SortItemsComponent from "../../../components/fragments/SortItems";
-import ThemeSelectorComponent from "../../../components/fragments/ThemeSelector";
+import ColorThemeComponent from "@/components/fragments/ColorTheme";
+import FormatCurrencyComponent from "@/components/fragments/FormatCurrency";
+import SortItemsComponent from "@/components/fragments/SortItems";
+import ThemeSelectorComponent from "@/components/fragments/ThemeSelector";
 
 export default function SettingPage() {
   return (

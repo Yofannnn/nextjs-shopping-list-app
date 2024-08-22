@@ -1,26 +1,20 @@
 "use client";
 
-import TopBarComponent from "../../../../components/fragments/TopBar";
-import WrapperListItems from "../../../../components/fragments/ListItems";
-import MenuOptions from "../../../../components/fragments/MenuOptions";
+import TopBarComponent from "@/components/fragments/TopBar";
+import WrapperListItems from "@/components/fragments/ListItems";
+import MenuOptions from "@/components/fragments/MenuOptions";
 import { useEffect } from "react";
 import { CircularProgress } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../redux/store";
-import { setSlugContainerId } from "../../../../redux/slice/slug.slice";
-import { loadCurrency } from "../../../../redux/slice/currency.slice";
-import { loadSort } from "../../../../redux/slice/sort.slice";
-import { fetchItems } from "../../../../redux/slice/items.slice";
-import { loadInitialMoney } from "../../../../redux/slice/initmoney.slice";
-import { loadContainersTrash } from "../../../../redux/slice/trash.slice";
-import {
-  clearRedoStack,
-  loadRedoStack,
-} from "../../../../redux/slice/redo.slice";
-import {
-  clearUndoStack,
-  loadUndoStack,
-} from "../../../../redux/slice/undo.slice";
+import { AppDispatch, RootState } from "@/redux/store";
+import { setSlugContainerId } from "@/redux/slice/slug.slice";
+import { loadCurrency } from "@/redux/slice/currency.slice";
+import { loadSort } from "@/redux/slice/sort.slice";
+import { fetchItems } from "@/redux/slice/items.slice";
+import { loadInitialMoney } from "@/redux/slice/initmoney.slice";
+import { loadContainersTrash } from "@/redux/slice/trash.slice";
+import { clearRedoStack, loadRedoStack } from "@/redux/slice/redo.slice";
+import { clearUndoStack, loadUndoStack } from "@/redux/slice/undo.slice";
 
 export default function ReadWritePage({
   params,

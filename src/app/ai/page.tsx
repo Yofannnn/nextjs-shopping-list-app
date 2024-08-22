@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import AddNewItemsFromAiComponent from "../../../components/fragments/AddNewItemsFromAi";
+import AddNewItemsFromAiComponent from "@/components/fragments/AddNewItemsFromAi";
 import MarkdownIt from "markdown-it";
-import { PlaceholdersAndVanishInput } from "../../../components/ui/placeholders-and-vanish-input";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
-import { fetchContainer } from "../../../redux/slice/container.slice";
+import { AppDispatch } from "@/redux/store";
+import { fetchContainer } from "@/redux/slice/container.slice";
 
 export default function AIPage() {
   const wrapperRef = useRef(null);
