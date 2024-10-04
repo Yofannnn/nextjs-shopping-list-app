@@ -1,6 +1,7 @@
 import { Container } from "@/types/container.type";
 import EditContainerComponent from "./EditContainer";
 import DeleteContainerComponent from "./DeleteContainer";
+import Link from "next/link";
 
 const CardContainerComponent = ({ container }: { container: Container }) => {
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -10,7 +11,7 @@ const CardContainerComponent = ({ container }: { container: Container }) => {
 
   return (
     <>
-      <a
+      <Link
         href={`/create/${container.id}`}
         className="flex justify-between p-2 md:p-3 hover:bg-background rounded-2xl"
       >
@@ -34,7 +35,7 @@ const CardContainerComponent = ({ container }: { container: Container }) => {
             handleButtonClick={handleButtonClick}
           />
         </div>
-      </a>
+      </Link>
     </>
   );
 };

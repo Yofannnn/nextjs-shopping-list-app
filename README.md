@@ -1,4 +1,4 @@
-# Shopping List Manager
+# NEXCART
 
 A web application built with Next.js, TypeScript, and Redux for managing shopping lists. The app features a clean and intuitive UI with components from NextUI and UI Shadcn, and includes integration with Gemini AI for enhanced user interactions.
 
