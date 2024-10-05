@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Syncopate:wght@400;700&family=Syne:wght@400..800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,6 +84,18 @@
 
 body {
   background: transparent;
+}
+
+.syncopate {
+  font-family: "Syncopate", sans-serif;
+}
+
+.syne {
+  font-family: "Syne", sans-serif;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
 }
 
 .container-input-checkbox {

@@ -42,7 +42,7 @@ const NewContainerComponent = () => {
     <>
       <form
         onSubmit={handleCreate}
-        className="flex items-end mx-auto max-w-[400px] h-[70px] px-3"
+        className="flex items-center mx-auto max-w-[400px] h-[70px] px-3 mt-[70px]"
       >
         <Input
           radius="full"

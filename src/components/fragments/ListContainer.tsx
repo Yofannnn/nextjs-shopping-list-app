@@ -37,14 +37,8 @@ const WrapperListContainer = () => {
 
   return (
     <>
-      <div
-        className="w-full overflow-y-auto flex justify-center"
-        style={{ height: "calc(100svh - 70px)" }}
-      >
-        <div
-          ref={parent}
-          className="w-full h-fit md:w-3/5 p-3 md:p-4 mb-16 sm:mb-20"
-        >
+      <div className="w-full flex justify-center">
+        <div ref={parent} className="w-full md:w-3/5 p-3 md:p-4 mb-4">
           {containers.map((container, i) => (
             <CardContainerComponent key={i} container={container} />
           ))}
