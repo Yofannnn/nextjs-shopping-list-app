@@ -1,8 +1,8 @@
 "use client";
 
-import TopBarComponent from "@/components/fragments/TopBar";
+import PlaygroundTopNavComponent from "@/components/fragments/PlaygroundTopNav";
 import WrapperListItems from "@/components/fragments/ListItems";
-import MenuOptions from "@/components/fragments/MenuOptions";
+import PlaygroundBottomNavComponent from "@/components/fragments/PlaygroundBottomNav";
 import { useEffect } from "react";
 import { CircularProgress } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -57,9 +57,9 @@ export default function ReadWritePage({
 
   return (
     <>
-      <TopBarComponent containerId={slug} />
+      <PlaygroundTopNavComponent containerId={slug} />
       <div className="flex justify-center">
-        <MenuOptions />
+        <PlaygroundBottomNavComponent />
         <WrapperListItems />
       </div>
     </>

@@ -14,9 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { clearItemsFromDb } from "@/redux/slice/items.slice";
 import { addTrashToDB } from "@/redux/slice/trash.slice";
-import { CircleX } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const ClearItemsComponent = () => {
+const ClearItemsComponent = ({ className }: { className: string }) => {
   const dispatch: AppDispatch = useDispatch();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { items } = useSelector((state: RootState) => state.items);
@@ -45,13 +45,13 @@ const ClearItemsComponent = () => {
   return (
     <>
       <button
-        className={`${
+        className={cn(
+          className,
           items.length !== 0 ? "opacity-100" : "opacity-50"
-        } flex flex-col md:flex-row items-center md:gap-2 py-1 md:py-3 md:pl-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-nowrap`}
+        )}
         disabled={items.length === 0}
         onClick={() => setIsAlertOpen(true)}
       >
-        <CircleX />
         Clear Items
       </button>
       <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>

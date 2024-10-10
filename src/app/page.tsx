@@ -1,6 +1,6 @@
-import BlurFade from "@/components/ui/blur-fade";
-import FadeText from "@/components/ui/fade-text";
-import WordPullUp from "@/components/ui/word-pull-up";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { FadeText } from "@/components/ui/fade-text";
+import { WordPullUp } from "@/components/ui/word-pull-up";
 import { Card, CardBody } from "@nextui-org/react";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -98,9 +98,9 @@ export default function Home() {
             </BlurFade>
             <BlurFade delay={0.4} blur="0px">
               <p className="inter text-sm lg:text-base text-muted-foreground">
-                <span className="syncopate font-semibold">NEXCART</span> is web application
-                built with Next.js and styled using NextUI and UI Shadcn,
-                provides a comprehensive shopping list management tool.
+                <span className="syncopate font-semibold">NEXCART</span> is web
+                application built with Next.js and styled using NextUI and UI
+                Shadcn, provides a comprehensive shopping list management tool.
                 Developed in TypeScript, it allows users to add, delete, update,
                 and view shopping items, with data stored in IndexedDB. The app
                 supports dark and light themes, various sorting methods, and

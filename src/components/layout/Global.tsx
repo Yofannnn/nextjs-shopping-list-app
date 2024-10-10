@@ -9,6 +9,8 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { loadColorTheme } from "@/redux/slice/color.slice";
 import { setColorTheme } from "@/lib/color-themes";
+import { loadSort } from "@/redux/slice/sort.slice";
+import { loadCurrency } from "@/redux/slice/currency.slice";
 
 export default function GlobalLayout({
   children,
@@ -33,6 +35,8 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
 
   useEffect(() => {
+    dispatch(loadSort());
+    dispatch(loadCurrency());
     dispatch(loadColorTheme());
     setColorTheme(colorTheme, theme);
   }, [dispatch, colorTheme, theme]);

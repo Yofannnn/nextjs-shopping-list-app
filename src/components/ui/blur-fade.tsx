@@ -17,7 +17,7 @@ interface BlurFadeProps {
   once?: boolean;
 }
 
-export default function BlurFade({
+export function BlurFade({
   children,
   className,
   variant,

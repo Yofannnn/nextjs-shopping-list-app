@@ -20,7 +20,7 @@ import { pushUndoStack } from "@/redux/slice/undo.slice";
 import { clearRedoStack } from "@/redux/slice/redo.slice";
 import { CirclePlus } from "lucide-react";
 
-const AddNewItem = () => {
+const AddNewItem = ({ className }: { className: string }) => {
   const dispatch: AppDispatch = useDispatch();
   const { slugContainerId } = useSelector(
     (state: RootState) => state.slugContainerId
@@ -76,11 +76,8 @@ const AddNewItem = () => {
 
   return (
     <>
-      <button
-        className="flex flex-col md:flex-row items-center md:gap-2 py-1 md:py-3 md:pl-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-nowrap"
-        onClick={onOpen}
-      >
-        <CirclePlus /> New Item
+      <button className={className} onClick={onOpen}>
+        <CirclePlus /> Add Item
       </button>
       <Modal
         className="bg-background"

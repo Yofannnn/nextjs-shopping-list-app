@@ -11,7 +11,7 @@ type FadeTextProps = {
   once?: boolean;
 };
 
-export default function FadeText({
+export function FadeText({
   direction = "up",
   className,
   framerProps = {

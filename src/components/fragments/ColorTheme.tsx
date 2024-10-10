@@ -1,58 +1,46 @@
 "use client";
 
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@nextui-org/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { Selection } from "@react-types/shared";
 import { setColorThemeToLocalStorage } from "@/redux/slice/color.slice";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-const ColorThemeComponent = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+const ColorThemeComponent = ({ className }: { className: string }) => {
   return (
-    <>
-      <button
-        className="w-full pl-4 text-start py-4 text-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
-        onClick={onOpen}
-      >
-        Color Theme
-      </button>
-      <Modal
-        size="xs"
-        placement="center"
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        className="bg-background"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Choose the color you want
-              </ModalHeader>
-              <ModalBody>
-                <ListboxComponent />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className={className}>Color Preference</button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Color Preference</DialogTitle>
+          <DialogDescription>
+            Select color preference what you want
+          </DialogDescription>
+        </DialogHeader>
+        <ListboxComponent />
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -62,7 +50,7 @@ const ListboxComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const { colorTheme } = useSelector((state: RootState) => state.colorTheme);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(
-    new Set([colorTheme])
+    new Set([colorTheme || "default"])
   );
 
   const handleSelectionChange = (keys: Selection) => {

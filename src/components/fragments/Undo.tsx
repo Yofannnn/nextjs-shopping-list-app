@@ -6,8 +6,9 @@ import { setUndoRedoToDB } from "@/redux/slice/items.slice";
 import { updateTrashToDB } from "@/redux/slice/trash.slice";
 import { Item } from "@/types/item.type";
 import { Undo2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const UndoComponent = () => {
+const UndoComponent = ({ className }: { className: string }) => {
   const dispatch: AppDispatch = useDispatch();
   const undoStack = useSelector((state: RootState) => state.undo);
   const { items } = useSelector((state: RootState) => state.items);
@@ -57,9 +58,10 @@ const UndoComponent = () => {
   return (
     <>
       <button
-        className={`${
+        className={cn(
+          className,
           undoStack.length == 0 ? "opacity-50" : "opacity-100"
-        } flex flex-col md:flex-row items-center md:gap-2 py-1 md:py-3 md:pl-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-nowrap`}
+        )}
         onClick={handleClick}
         disabled={undoStack.length === 0}
       >

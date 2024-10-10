@@ -1,62 +1,43 @@
 "use client";
 
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Listbox, ListboxItem } from "@nextui-org/react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { loadSort, setSortToLocalStorage } from "@/redux/slice/sort.slice";
+import { setSortToLocalStorage } from "@/redux/slice/sort.slice";
 import { Selection } from "@react-types/shared";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
 
-const SortItemsComponent = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  useEffect(() => {
-    dispatch(loadSort());
-  });
-
+const SortItemsComponent = ({ className }: { className: string }) => {
   return (
-    <>
-      <button
-        className="w-full pl-4 text-start py-4 text-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
-        onClick={onOpen}
-      >
-        Sort State
-      </button>
-      <Modal
-        size="xs"
-        placement="center"
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        className="bg-background"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Sort By</ModalHeader>
-              <ModalBody>
-                <ListboxComponent />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className={className}>Sort List</button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Sort By</DialogTitle>
+        </DialogHeader>
+        <ListboxComponent />
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -66,7 +47,7 @@ const ListboxComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const { sort } = useSelector((state: RootState) => state.sort);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(
-    new Set([sort])
+    new Set([sort || "time"])
   );
 
   const handleSelectionChange = (keys: Selection) => {

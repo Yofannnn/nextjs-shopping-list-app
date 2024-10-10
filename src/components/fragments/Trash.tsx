@@ -3,17 +3,22 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "../ui/drawer";
+} from "@/components/ui/dropdown-menu";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { Trash2 } from "lucide-react";
 import ClearTrashComponent from "./ClearTrash";
 import RestoreAllComponent from "./RestoreAll";
 import CardTrashComponent from "./CardTrash";
+import { cn } from "@/lib/utils";
 
-const TrashComponent = () => {
+const TrashComponent = ({ className }: { className: string }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { slugContainerId } = useSelector(
     (state: RootState) => state.slugContainerId
@@ -25,15 +30,15 @@ const TrashComponent = () => {
   return (
     <>
       <button
-        className={`${
+        className={cn(
+          className,
           trashes && trashes?.length > 0 ? "opacity-100" : "opacity-50"
-        } flex flex-col md:flex-row items-center md:gap-2 py-1 md:py-3 md:pl-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-nowrap`}
+        )}
         onClick={() => {
           setIsDrawerOpen(true);
         }}
         disabled={trashes?.length === 0}
       >
-        <Trash2 />
         Trash
       </button>
       <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>

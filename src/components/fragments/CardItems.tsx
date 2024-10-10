@@ -21,10 +21,10 @@ const CardItem = ({ item }: { item: Item }) => {
         <div className="flex justify-between items-center gap-3 md:gap-4 py-1 md:py-2">
           <CheckboxItem item={item} />
           <div className="w-full">
-            <h1 className="text-xl flex justify-start items-center">
+            <h1 className="text-sm md:text-xl flex justify-start items-center">
               {item.title}
             </h1>
-            <h4 className="text-base">
+            <h4 className="text-xs md:text-base">
               {item.price ? formatter.format(item.price) : null}
             </h4>
           </div>

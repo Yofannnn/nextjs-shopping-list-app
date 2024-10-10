@@ -1,57 +1,42 @@
 "use client";
 
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@nextui-org/react";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { Selection } from "@react-types/shared";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-const ThemeSelectorComponent = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+const ThemeSelectorComponent = ({ className }: { className: string }) => {
   return (
-    <>
-      <button
-        className="w-full pl-4 text-start py-4 text-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
-        onClick={onOpen}
-      >
-        Themes
-      </button>
-      <Modal
-        size="xs"
-        placement="center"
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        className="bg-background"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Select Theme
-              </ModalHeader>
-              <ModalBody>
-                <ListboxComponent />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className={className}>Themes</button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Theme</DialogTitle>
+          <DialogDescription>Select your preference theme</DialogDescription>
+        </DialogHeader>
+        <ListboxComponent />
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 

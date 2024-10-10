@@ -6,8 +6,9 @@ import { setUndoRedoToDB } from "@/redux/slice/items.slice";
 import { updateTrashToDB } from "@/redux/slice/trash.slice";
 import { Item } from "@/types/item.type";
 import { Redo2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const RedoComponent = () => {
+const RedoComponent = ({ className }: { className: string }) => {
   const dispatch: AppDispatch = useDispatch();
   const redoStack = useSelector((state: RootState) => state.redo);
   const { items } = useSelector((state: RootState) => state.items);
@@ -77,9 +78,10 @@ const RedoComponent = () => {
   return (
     <>
       <button
-        className={`${
+        className={cn(
+          className,
           redoStack.length == 0 ? "opacity-50" : "opacity-100"
-        } flex flex-col md:flex-row items-center md:gap-2 py-1 md:py-3 md:pl-3 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-nowrap`}
+        )}
         onClick={handleClick}
         disabled={redoStack.length === 0}
       >

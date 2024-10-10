@@ -24,7 +24,7 @@ const NewContainerComponent = () => {
       return;
     }
 
-    const id = `rw-${uuidv4()}`;
+    const id = `c-${uuidv4()}`;
     const title = inputNewContainer;
     const items: Item[] = [];
 

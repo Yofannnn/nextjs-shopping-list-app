@@ -1,67 +1,46 @@
 "use client";
 
-import {
-  Button,
-  Listbox,
-  ListboxItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { Listbox, ListboxItem } from "@nextui-org/react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import {
-  loadCurrency,
-  setCurrencyToLocalStorage,
-} from "@/redux/slice/currency.slice";
+import { setCurrencyToLocalStorage } from "@/redux/slice/currency.slice";
 import { Selection } from "@react-types/shared";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-const FormatCurrencyComponent = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  useEffect(() => {
-    dispatch(loadCurrency());
-  }, [dispatch]);
-
+const FormatCurrencyComponent = ({ className }: { className: string }) => {
   return (
-    <>
-      <button
-        className="w-full pl-4 text-start py-4 text-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
-        onClick={onOpen}
-      >
-        Format Currency
-      </button>
-      <Modal
-        size="xs"
-        placement="center"
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        className="bg-background"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Select format currency
-              </ModalHeader>
-              <ModalBody>
-                <ListboxComponent />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className={className}>Format Currency</button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Format Currency</DialogTitle>
+          <DialogDescription>
+            Select the currency format you want
+          </DialogDescription>
+        </DialogHeader>
+        <ListboxComponent />
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              Close
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
@@ -71,7 +50,7 @@ const ListboxComponent = () => {
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useSelector((state: RootState) => state.currency);
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(
-    new Set([currency])
+    new Set([currency || "id-ID,IDR"])
   );
 
   const handleSelectionChange = (keys: Selection) => {

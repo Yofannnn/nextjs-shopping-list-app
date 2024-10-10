@@ -12,7 +12,7 @@ interface WordPullUpProps {
   once?: boolean;
 }
 
-export default function WordPullUp({
+export function WordPullUp({
   words,
   wrapperFramerProps = {
     hidden: { opacity: 0 },
