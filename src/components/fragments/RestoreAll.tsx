@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../ui/alert-dialog";
-import { Button } from "@nextui-org/react";
+} from "@/components/ui/alert-dialog";
 import { AppDispatch, RootState } from "@/redux/store";
 import { clearTrashFromDB } from "@/redux/slice/trash.slice";
 import { pushUndoStack } from "@/redux/slice/undo.slice";
@@ -59,16 +60,15 @@ const RestoreAllComponent = ({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <Button
-              color="primary"
-              variant="bordered"
+            <AlertDialogCancel
+              variant="secondary"
               onClick={() => setIsAlertOpen(false)}
             >
               Cancel
-            </Button>
-            <Button color="primary" onClick={handleClick}>
+            </AlertDialogCancel>
+            <AlertDialogAction variant="default" onClick={handleClick}>
               Restore All
-            </Button>
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

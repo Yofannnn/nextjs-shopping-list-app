@@ -7,6 +7,7 @@ import {
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
@@ -17,6 +18,7 @@ import ClearTrashComponent from "./ClearTrash";
 import RestoreAllComponent from "./RestoreAll";
 import CardTrashComponent from "./CardTrash";
 import { cn } from "@/lib/utils";
+import { AlignJustify, AlignJustifyIcon } from "lucide-react";
 
 const TrashComponent = ({ className }: { className: string }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -50,6 +52,7 @@ const TrashComponent = ({ className }: { className: string }) => {
                 <DropdownComponent />
               </DrawerTitle>
             )}
+            <DrawerDescription />
           </DrawerHeader>
           <div className="overflow-x-hidden overflow-y-auto py-2">
             <div className="mx-auto mb-5 w-[90vw] md:w-[50vw] max-h-[65vh]">
@@ -86,19 +89,7 @@ const DropdownComponent = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              fill="currentColor"
-              className="bi bi-list"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-              />
-            </svg>
+            <AlignJustifyIcon className="size-5 md:size-6" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-fit p-2">

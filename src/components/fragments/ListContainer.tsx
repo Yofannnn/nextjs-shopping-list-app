@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { CircularProgress } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchContainer } from "@/redux/slice/container.slice";
@@ -24,7 +23,7 @@ const WrapperListContainer = () => {
   if (status === "loading" || status === "idle")
     return (
       <div className="w-full h-calc-screen-minus-160 flex justify-center items-center">
-        <CircularProgress label="Loading..." />
+        <h2 className="text-3xl">Loading...</h2>
       </div>
     );
 

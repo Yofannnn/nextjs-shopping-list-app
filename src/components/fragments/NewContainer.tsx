@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Input } from "@nextui-org/react";
+import { Input } from "@nextui-org/input";
+import { Button } from "@/components/ui/button";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
@@ -47,11 +48,11 @@ const NewContainerComponent = () => {
         <Input
           radius="full"
           type="text"
-          label="Create Session"
+          label="Create Container List"
           value={inputNewContainer}
           onChange={(e) => setInputNewContainer(e.target.value)}
           endContent={
-            <Button type="submit" color="primary" radius="full">
+            <Button type="submit" className="rounded-full">
               Create
             </Button>
           }

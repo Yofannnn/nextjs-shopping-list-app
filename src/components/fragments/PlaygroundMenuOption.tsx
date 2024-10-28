@@ -8,6 +8,7 @@ import ColorThemeComponent from "./ColorTheme";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -30,6 +31,7 @@ const PlaygroundMenuOptionComponent = () => {
           <SheetTitle className="syne text-lg md:text-xl lg:text-2xl">
             Menu
           </SheetTitle>
+          <SheetDescription />
         </SheetHeader>
         <div className="grid pt-6 pb-4">
           <StartingBudgetComponent className={buttonClassName} />

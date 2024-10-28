@@ -1,13 +1,14 @@
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../ui/alert-dialog";
-import { Button } from "@nextui-org/react";
-import { useState } from "react";
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { pushUndoStack } from "@/redux/slice/undo.slice";
 import { clearRedoStack } from "@/redux/slice/redo.slice";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +19,6 @@ import { cn } from "@/lib/utils";
 
 const ClearItemsComponent = ({ className }: { className: string }) => {
   const dispatch: AppDispatch = useDispatch();
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { items } = useSelector((state: RootState) => state.items);
   const { slugContainerId } = useSelector(
     (state: RootState) => state.slugContainerId
@@ -38,41 +38,36 @@ const ClearItemsComponent = ({ className }: { className: string }) => {
     dispatch(clearRedoStack());
 
     dispatch(clearItemsFromDb(slugContainerId));
-
-    setIsAlertOpen(false);
   };
 
   return (
-    <>
-      <button
-        className={cn(
-          className,
-          items.length !== 0 ? "opacity-100" : "opacity-50"
-        )}
-        disabled={items.length === 0}
-        onClick={() => setIsAlertOpen(true)}
-      >
-        Clear Items
-      </button>
-      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will delete all items and move to trash.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <Button color="primary" onClick={() => setIsAlertOpen(false)}>
-              Cancel
-            </Button>
-            <Button color="danger" onClick={handleClick}>
-              Clear Items
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <button
+          className={cn(
+            className,
+            items.length !== 0 ? "opacity-100" : "opacity-50"
+          )}
+          disabled={items.length === 0}
+        >
+          Clear Items
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will delete all items and move to trash.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
+          <AlertDialogAction variant="destructive" onClick={handleClick}>
+            Clear Items
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

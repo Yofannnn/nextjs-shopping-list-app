@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../ui/alert-dialog";
-import { Button } from "@nextui-org/react";
+} from "@/components/ui/alert-dialog";
 import { AppDispatch, RootState } from "@/redux/store";
 import { clearTrashFromDB } from "@/redux/slice/trash.slice";
 
@@ -40,12 +41,15 @@ const ClearTrashComponent = ({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <Button color="primary" onClick={() => setIsAlertOpen(false)}>
+            <AlertDialogCancel
+              variant="secondary"
+              onClick={() => setIsAlertOpen(false)}
+            >
               Cancel
-            </Button>
-            <Button color="danger" onClick={handleClick}>
+            </AlertDialogCancel>
+            <AlertDialogAction variant="destructive" onClick={handleClick}>
               Clear Trash
-            </Button>
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

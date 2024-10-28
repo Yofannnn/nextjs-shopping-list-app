@@ -4,7 +4,6 @@ import PlaygroundTopNavComponent from "@/components/fragments/PlaygroundTopNav";
 import WrapperListItems from "@/components/fragments/ListItems";
 import PlaygroundBottomNavComponent from "@/components/fragments/PlaygroundBottomNav";
 import { useEffect } from "react";
-import { CircularProgress } from "@nextui-org/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { setSlugContainerId } from "@/redux/slice/slug.slice";
@@ -49,7 +48,7 @@ export default function ReadWritePage({
   if (status === "loading" || status === "idle")
     return (
       <div className="w-full h-svh flex justify-center items-center">
-        <CircularProgress label="Loading..." />
+        <h2 className="text-3xl">Loading...</h2>
       </div>
     );
 

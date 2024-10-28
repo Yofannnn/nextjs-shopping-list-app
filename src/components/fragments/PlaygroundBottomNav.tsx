@@ -9,7 +9,7 @@ const PlaygroundBottomNavComponent = () => {
 
   return (
     <>
-      <div className="fixed bottom-0 sm:top-0 sm:sticky w-full sm:h-fit overflow-x-auto sm:w-1/5 z-40">
+      <div className="fixed bottom-0 sm:top-0 sm:sticky w-full sm:h-fit overflow-x-auto sm:w-1/5 z-40 bg-white dark:bg-black">
         <div className="flex flex-row sm:flex-col justify-evenly gap-6 sm:gap-4 px-2 sm:py-4 sm:mt-[65px]">
           <AddNewItem className={buttonClassName} />
           <UndoComponent className={buttonClassName} />

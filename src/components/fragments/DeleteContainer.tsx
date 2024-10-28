@@ -1,69 +1,69 @@
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../ui/alert-dialog";
-import { Button } from "@nextui-org/react";
-import { useState } from "react";
+} from "@/components/ui/alert-dialog";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { deleteContainerToDB } from "@/redux/slice/container.slice";
 import { deleteContainerTrashFromDB } from "@/redux/slice/trash.slice";
 import { deleteContainerInitialMoney } from "@/redux/slice/initmoney.slice";
+import { Button } from "../ui/button";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const DeleteContainerComponent = ({
   containerId,
   containerTitle,
-  handleButtonClick,
+  isOpen,
+  setIsOpen,
 }: {
   containerId: string;
   containerTitle: string;
-  handleButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const dispatch: AppDispatch = useDispatch();
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   const handleClick = () => {
     dispatch(deleteContainerToDB(containerId));
     dispatch(deleteContainerTrashFromDB(containerId));
     dispatch(deleteContainerInitialMoney(containerId));
-    setIsAlertOpen(false);
+    setIsOpen(false);
+  };
+
+  const handleOpenModal = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setIsOpen(true);
   };
 
   return (
-    <>
-      <button
-        className="text-danger"
-        onClick={(e) => {
-          setIsAlertOpen(true);
-          handleButtonClick(e);
-        }}
-      >
+    <AlertDialog open={isOpen}>
+      <Button variant="destructive" size="sm" onClick={handleOpenModal}>
         Delete
-      </button>
-      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete{" "}
-              <span className="font-bold">{containerTitle}</span> and remove from your database.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <Button color="primary" onClick={() => setIsAlertOpen(false)}>
-              Cancle
-            </Button>
-            <Button color="danger" onClick={handleClick}>
-              Delete
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
+      </Button>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete{" "}
+            <span className="font-bold">{containerTitle}</span> and remove from
+            your database.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel onClick={() => setIsOpen(false)}>
+            Cancel
+          </AlertDialogCancel>
+          <AlertDialogAction onClick={handleClick}>Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

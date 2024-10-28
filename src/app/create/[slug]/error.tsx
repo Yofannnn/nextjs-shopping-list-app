@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Error({
@@ -15,9 +15,7 @@ export default function Error({
         <p className="text-xl text-center">{error.message}</p>
       </div>
       <Link href="/create" className="text-xl">
-        <Button color="primary" variant="shadow">
-          Back
-        </Button>
+        <Button>Back</Button>
       </Link>
     </div>
   );

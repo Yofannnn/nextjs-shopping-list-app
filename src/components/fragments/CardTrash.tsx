@@ -1,6 +1,7 @@
 import RestoreComponent from "./Restore";
 import { Item } from "@/types/item.type";
-import { Card, CardBody, Chip } from "@nextui-org/react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { formatCurrency } from "@/lib/format-currency";
@@ -17,29 +18,18 @@ const CardTrashComponent = ({ trash }: { trash: Item }) => {
   return (
     <>
       <Card className="w-full my-2 bg-card">
-        <CardBody>
-          <div className="flex justify-between items-center gap-3 md:gap-4 py-1 md:py-2">
-            <div className="w-full">
-              <h1 className="text-xl flex justify-start items-center gap-2">
-                {trash.title}
-                {trash.edit ? (
-                  <Chip
-                    variant="shadow"
-                    size="sm"
-                    classNames={{
-                      base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-                      content: "drop-shadow shadow-black text-white",
-                    }}
-                  >
-                    edited
-                  </Chip>
-                ) : null}
-              </h1>
-              <h4 className="text-base">{formatter.format(trash.price)}</h4>
-            </div>
-            <RestoreComponent itemTobeProcessed={trash} />
+        <div className="flex justify-between items-center gap-3 md:gap-4 px-2 md:px-4 py-1.5 md:py-2 overflow-hidden">
+          <div className="max-w-[80%]">
+            <h5 className="text-sm md:text-base lg:text-lg flex justify-start items-center gap-2">
+              {trash.title}
+            </h5>
+            <h6 className="text-xs md:text-base">
+              {formatter.format(trash.price)}
+            </h6>
+            {trash.edit ? <Badge>edited</Badge> : null}
           </div>
-        </CardBody>
+          <RestoreComponent itemTobeProcessed={trash} />
+        </div>
       </Card>
     </>
   );

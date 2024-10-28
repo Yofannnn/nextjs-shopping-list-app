@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/react";
+import { Input } from "@nextui-org/input";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";

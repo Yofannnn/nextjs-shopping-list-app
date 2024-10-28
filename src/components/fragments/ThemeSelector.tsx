@@ -1,6 +1,6 @@
 "use client";
 
-import { Listbox, ListboxItem } from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { Selection } from "@react-types/shared";

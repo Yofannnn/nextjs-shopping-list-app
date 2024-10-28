@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getListItems } from "@/indexedDB/item.indexedDB";
-import { Skeleton } from "@nextui-org/skeleton";
 import { ChevronLeft, Search } from "lucide-react";
 import PlaygroundMenuOptionComponent from "./PlaygroundMenuOption";
 import { Input } from "@/components/ui/input";
@@ -29,11 +28,9 @@ const PlaygroundTopNavComponent = ({
         <Link href="/create" className="p-2 rounded-full">
           <ChevronLeft className="size-6 md:size-7" />
         </Link>
-        {titleContainer ? (
-          <h2 className="syne text-xl font-medium hidden md:block ml-3">{titleContainer}</h2>
-        ) : (
-          <Skeleton className="hidden md:block h-5 w-2/12 rounded-lg ml-3" />
-        )}
+        <h2 className="syne text-xl font-medium hidden md:block ml-3">
+          {titleContainer}
+        </h2>
       </div>
       <div className="relative md:ml-auto">
         <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />

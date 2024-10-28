@@ -1,6 +1,6 @@
 "use client";
 
-import { Listbox, ListboxItem } from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -27,6 +27,7 @@ const SortItemsComponent = ({ className }: { className: string }) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Sort By</DialogTitle>
+          <DialogDescription />
         </DialogHeader>
         <ListboxComponent />
         <DialogFooter>

@@ -1,14 +1,15 @@
+import { Button } from "@/components/ui/button";
 import {
-  Button,
-  Input,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from "@nextui-org/react";
-import { useEffect, useState } from "react";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { editContainerTitleToDB } from "@/redux/slice/container.slice";
@@ -16,11 +17,13 @@ import { editContainerTitleToDB } from "@/redux/slice/container.slice";
 const EditContainerComponent = ({
   containerId,
   containerTitle,
-  handleButtonClick,
+  isOpen,
+  setIsOpen,
 }: {
   containerId: string;
   containerTitle: string;
-  handleButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const dispatch: AppDispatch = useDispatch();
   const [inputTitle, setInputTitle] = useState("");
@@ -41,7 +44,7 @@ const EditContainerComponent = ({
     }
 
     if (inputTitle === containerTitle) {
-      onOpenChange();
+      setIsOpen(false);
       return;
     }
 
@@ -49,68 +52,55 @@ const EditContainerComponent = ({
 
     dispatch(editContainerTitleToDB({ containerId, newTitle: inputTitle }));
 
-    onOpenChange();
+    setIsOpen(false);
   };
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    setIsOpen(true);
+  };
 
   return (
-    <>
-      <button
-        onClick={(e) => {
-          onOpen();
-          handleButtonClick(e);
-        }}
-      >
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Button variant="outline" size="sm" onClick={handleClick}>
         Edit
-      </button>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        placement="top-center"
-        className="bg-background"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Edit {containerTitle} name
-              </ModalHeader>
-              <ModalBody>
-                <form onSubmit={handleSubmit}>
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                    <Input
-                      type="text"
-                      variant="bordered"
-                      color="primary"
-                      label="Enter new title"
-                      isInvalid={inputInvalid}
-                      errorMessage="Please enter a valid title"
-                      value={inputTitle}
-                      onChange={(e) => setInputTitle(e.target.value)}
-                      autoFocus
-                    />
-                  </div>
-                  <ModalFooter>
-                    <Button
-                      type="button"
-                      color="primary"
-                      variant="light"
-                      onPress={onClose}
-                    >
-                      Cancel
-                    </Button>
-                    <Button type="submit" color="primary" variant="solid">
-                      Save
-                    </Button>
-                  </ModalFooter>
-                </form>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
+      </Button>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit Container</DialogTitle>
+          <DialogDescription />
+        </DialogHeader>
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-2 pb-6">
+            <Label htmlFor="title">Title</Label>
+            <Input
+              type="text"
+              id="title"
+              placeholder="Enter new title"
+              value={inputTitle}
+              onChange={(e) => setInputTitle(e.target.value)}
+              autoFocus
+            />
+            {inputInvalid && (
+              <span className="text-destructive text-xs">
+                Please enter a valid title
+              </span>
+            )}
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

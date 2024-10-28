@@ -1,7 +1,7 @@
 import { BlurFade } from "@/components/ui/blur-fade";
 import { FadeText } from "@/components/ui/fade-text";
 import { WordPullUp } from "@/components/ui/word-pull-up";
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -145,14 +145,14 @@ export default function Home() {
                 className="col-span-1"
               >
                 <Card>
-                  <CardBody className="p-5 min-h-[200px] lg:min-h-[230px]">
+                  <CardContent className="p-5 min-h-[200px] lg:min-h-[230px]">
                     <h6 className="syne text-lg lg:text-xl font-semibold leading-5 mb-3">
                       {feature.title}
                     </h6>
                     <p className="inter text-sm lg:text-base text-muted-foreground">
                       {feature.desc}
                     </p>
-                  </CardBody>
+                  </CardContent>
                 </Card>
               </BlurFade>
             ))}
@@ -160,7 +160,7 @@ export default function Home() {
         </div>
       </div>
       <footer className="-z-10 fixed bottom-0 w-full h-[70vh] overflow-hidden flex justify-center items-center">
-        <h1 className="syncopate text-[11vmax] md:text-[17vmax] font-extrabold">
+        <h1 className="syncopate text-[11vmax] md:text-[17vmax] font-bold text-muted-foreground">
           NEXCART
         </h1>
         <Link href="https://yofann.vercel.app" className="fixed bottom-3 group">

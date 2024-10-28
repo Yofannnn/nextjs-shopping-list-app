@@ -1,14 +1,12 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@nextui-org/input";
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
-  Button,
-  Input,
-  Tab,
-  Tabs,
-} from "@nextui-org/react";
+  ModalProvider,
+} from "@/components/ui/animated-modal";
+import { Tab, Tabs } from "@nextui-org/tabs";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
@@ -90,95 +88,81 @@ const AddNewItemsFromAiComponent = ({
   };
 
   return (
-    <>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        placement="top-center"
-        scrollBehavior="inside"
-        className="bg-background"
-        isDismissable={false}
-      >
-        <ModalContent>
-          <ModalHeader className="flex flex-col gap-1">
-            Save suggestion from Ai?
-          </ModalHeader>
-          <ModalBody>
-            <Tabs aria-label="Options" color="primary" radius="full">
-              {containers.length !== 0 && (
-                <Tab key="existing-containers" title="Existing Containers">
-                  <div className="mt-3">
-                    {containers.map((container) => (
-                      <div
-                        className="flex justify-between items-center px-2 py-3 hover:bg-neutral-300 dark:hover:bg-neutral-950 rounded-2xl"
-                        key={container.id}
+    <ModalProvider open={isOpen} setOpen={onOpenChange}>
+      <ModalBody className="max-w-[500px] max-h-[90svh]">
+        <ModalContent className="w-full h-full px-4 py-5 md:p-8 overflow-y-auto">
+          <Tabs
+            aria-label="Options"
+            color="primary"
+            radius="full"
+            className="w-full"
+          >
+            {containers.length !== 0 && (
+              <Tab
+                key="existing-containers"
+                title="Existing Containers"
+                className="w-full"
+              >
+                <div className="mt-3">
+                  {containers.map((container) => (
+                    <div
+                      className="flex justify-between items-center px-2 py-3 rounded-2xl border my-1 hover:bg-white hover:dark:bg-black"
+                      key={container.id}
+                    >
+                      {container.title}
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          handleAddNewItemsInExistingContainerFromAi(
+                            container.id
+                          )
+                        }
                       >
-                        {container.title}
-                        <Button
-                          type="button"
-                          color="primary"
-                          onClick={() =>
-                            handleAddNewItemsInExistingContainerFromAi(
-                              container.id
-                            )
-                          }
-                        >
-                          Save
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </Tab>
-              )}
-              <Tab key="create-container" title="Create Container">
-                <form
-                  onSubmit={handleAddNewItemsInNewContainer}
-                  className="my-3"
-                >
-                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
-                    <Input
-                      type="text"
-                      variant="bordered"
-                      radius="full"
-                      label="Enter New Container Name"
-                      isInvalid={inputInvalid}
-                      errorMessage="Please enter a valid title"
-                      onChange={(e) => setNewContainerTitle(e.target.value)}
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    radius="full"
-                    className="w-full"
-                  >
-                    Create and Save
-                  </Button>
-                </form>
-              </Tab>
-              <Tab key="ingrediens" title="Ingredients">
-                <ul className="list-disc pl-3 py-2">
-                  {itemsAddToContainer.map((title, i) => (
-                    <li key={i} className="">
-                      {title}
-                    </li>
+                        Save
+                      </Button>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </Tab>
-            </Tabs>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              color="primary"
-              variant="light"
-              onClick={() => onOpenChange(false)}
-            >
-              Close
-            </Button>
-          </ModalFooter>
+            )}
+            <Tab key="create-container" title="Create Container">
+              <form onSubmit={handleAddNewItemsInNewContainer} className="my-3">
+                <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
+                  <Input
+                    type="text"
+                    variant="bordered"
+                    radius="full"
+                    label="Enter New Container Name"
+                    isInvalid={inputInvalid}
+                    errorMessage="Please enter a valid title"
+                    onChange={(e) => setNewContainerTitle(e.target.value)}
+                    endContent={
+                      <Button type="submit" size="sm" className="rounded-full">
+                        Create and Save
+                      </Button>
+                    }
+                  />
+                </div>
+              </form>
+            </Tab>
+            <Tab key="ingrediens" title="Ingredients">
+              <ul className="list-disc pl-3 py-2">
+                {itemsAddToContainer.map((title, i) => (
+                  <li key={i} className="">
+                    {title}
+                  </li>
+                ))}
+              </ul>
+            </Tab>
+          </Tabs>
         </ModalContent>
-      </Modal>
-    </>
+        <ModalFooter className="px-4 pb-4 md:px-8 md:pb-8">
+          <Button>Close</Button>
+        </ModalFooter>
+      </ModalBody>
+    </ModalProvider>
   );
 };
 
