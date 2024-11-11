@@ -4,6 +4,9 @@ import { getListItems } from "@/indexedDB/item.indexedDB";
 import { ChevronLeft, Search } from "lucide-react";
 import PlaygroundMenuOptionComponent from "./PlaygroundMenuOption";
 import { Input } from "@/components/ui/input";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { setSearchItem } from "@/redux/slice/search.slice";
 
 const PlaygroundTopNavComponent = ({
   containerId,
@@ -22,6 +25,11 @@ const PlaygroundTopNavComponent = ({
     document.title = titleContainer;
   });
 
+  const dispatch: AppDispatch = useDispatch();
+  const handleSearchItems = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchItem(e.target.value));
+  };
+
   return (
     <nav className="fixed top-0 h-[65px] w-full flex justify-between items-center px-5 backdrop-blur bg-background[.2] z-50">
       <div className="flex justify-between items-center mr-2">
@@ -38,6 +46,7 @@ const PlaygroundTopNavComponent = ({
           type="search"
           placeholder="Search..."
           className="w-full rounded-lg bg-background pl-8 md:w-[320px]"
+          onChange={handleSearchItems}
         />
       </div>
       <PlaygroundMenuOptionComponent />
