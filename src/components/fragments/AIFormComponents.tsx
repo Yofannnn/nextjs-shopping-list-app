@@ -76,15 +76,6 @@ const AIFormComponents = ({
         buffer += decoder.decode(value, { stream: true });
 
         setChat((prev) => {
-          const lastIndex = prev.length - 1;
-          if (prev[lastIndex]?.role === "user") {
-            const update = [
-              ...prev,
-              { role: "assistant" as "assistant", content: buffer, status: "success" as "success" },
-            ];
-            sessionStorage.setItem("chat", JSON.stringify(update));
-            return update;
-          }
           const update = [...prev];
           update[update.length - 1] = {
             role: "assistant",
@@ -103,7 +94,16 @@ const AIFormComponents = ({
         setIsModalOpen(true);
       }
     } catch (error: any) {
-      setChat((prev) => [...prev, { role: "assistant", content: error.message, status: "failed" }]);
+      setChat((prev) => {
+        const update = [...prev];
+        update[update.length - 1] = {
+          role: "assistant",
+          content: error.message,
+          status: "failed",
+        };
+        sessionStorage.setItem("chat", JSON.stringify(update));
+        return update;
+      });
     } finally {
       setPrompt("");
       setIsLoading(false);

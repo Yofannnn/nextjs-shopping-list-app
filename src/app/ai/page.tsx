@@ -50,9 +50,10 @@ export default function AssistantPage() {
                     <div
                       className={cn(
                         item.role === "user"
-                          ? "max-w-[85%] p-3 sm:p-4 my-4 justify-self-end bg-card rounded-2xl text-sm sm:text-base"
+                          ? "max-w-[85%] p-3 sm:p-4 my-4 justify-self-end self-end bg-card rounded-2xl text-sm sm:text-base"
                           : "w-full pt-3 sm:pt-4 my-1 text-sm sm:text-base",
-                        item.status === "failed" && "bg-destructive text-destructive-foreground"
+                        item.status === "failed" &&
+                          "w-fit p-2 sm:p-4 rounded-2xl bg-destructive text-destructive-foreground"
                       )}
                       dangerouslySetInnerHTML={{ __html: md.render(item.content) }}
                     ></div>

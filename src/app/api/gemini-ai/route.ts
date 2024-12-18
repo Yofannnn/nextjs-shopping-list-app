@@ -1,15 +1,16 @@
-import {
-  GoogleGenerativeAI,
-  HarmBlockThreshold,
-  HarmCategory,
-} from "@google/generative-ai";
-import { NextRequest, NextResponse } from "next/server";
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return NextResponse.json({ status: 404, message: "API key not found" });
+    return new Response(
+      JSON.stringify({
+        status: 403,
+        statusText: "API key is required.",
+      }),
+      { status: 403, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -27,13 +28,20 @@ export async function POST(req: NextRequest) {
     const { contents } = await req.json();
 
     if (!contents || !Array.isArray(contents)) {
-      return NextResponse.json({
-        status: 400,
-        message: "Invalid request body",
-      });
+      return new Response(
+        JSON.stringify({
+          status: 422,
+          statusText: "Invalid request body.",
+        }),
+        { status: 422, headers: { "Content-Type": "application/json" } }
+      );
     }
 
     const result = await model.generateContentStream({ contents });
+
+    if (!result || !result.stream) {
+      throw new Error("Failed to generate content or missing result stream");
+    }
 
     // Create a readable stream
     const stream = new ReadableStream({
@@ -49,10 +57,14 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return new NextResponse(stream, {
-      headers: { "Content-Type": "text/plain" },
-    });
+    return new Response(stream, { headers: { "Content-Type": "text/plain" } });
   } catch (error: any) {
-    return NextResponse.json({ status: 500, message: "Internal server error" });
+    return new Response(
+      JSON.stringify({
+        status: 500,
+        statusText: error.message || "Internal server error",
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }
