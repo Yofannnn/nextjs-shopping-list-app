@@ -11,12 +11,9 @@ import { loadColorTheme } from "@/redux/slice/color.slice";
 import { setColorTheme } from "@/lib/color-themes";
 import { loadSort } from "@/redux/slice/sort.slice";
 import { loadCurrency } from "@/redux/slice/currency.slice";
+import { fetchContainer } from "@/redux/slice/container.slice";
 
-export default function GlobalLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function GlobalLayout({ children }: { children: React.ReactNode }) {
   return (
     <Provider store={store}>
       <NextThemesProvider attribute="class" defaultTheme="dark">
@@ -28,8 +25,7 @@ export default function GlobalLayout({
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
-  const shouldRenderNavigation =
-    !pathName.includes("/create/") && !pathName.includes("/ai");
+  const shouldRenderNavigation = !pathName.includes("/create/");
   const dispatch: AppDispatch = useDispatch();
   const { colorTheme } = useSelector((state: RootState) => state.colorTheme);
   const { theme } = useTheme();
@@ -38,6 +34,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     dispatch(loadSort());
     dispatch(loadCurrency());
     dispatch(loadColorTheme());
+    dispatch(fetchContainer());
     setColorTheme(colorTheme, theme);
   }, [dispatch, colorTheme, theme]);
 

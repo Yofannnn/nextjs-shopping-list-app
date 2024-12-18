@@ -159,7 +159,7 @@ const AddNewItemsFromAiComponent = ({
           </Tabs>
         </ModalContent>
         <ModalFooter className="px-4 pb-4 md:px-8 md:pb-8">
-          <Button>Close</Button>
+          <Button onClick={() => onOpenChange(false)}>Close</Button>
         </ModalFooter>
       </ModalBody>
     </ModalProvider>

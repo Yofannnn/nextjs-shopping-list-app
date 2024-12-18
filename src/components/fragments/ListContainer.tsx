@@ -1,20 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/redux/store";
-import { fetchContainer } from "@/redux/slice/container.slice";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import CardContainerComponent from "./CardContainer";
 
 const WrapperListContainer = () => {
-  const dispatch: AppDispatch = useDispatch();
-
   const [parent] = useAutoAnimate();
-
-  useEffect(() => {
-    dispatch(fetchContainer());
-  }, [dispatch]);
 
   const { containers, status, error } = useSelector(
     (state: RootState) => state.container
