@@ -1,16 +1,21 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { fetchContainer } from "@/redux/slice/container.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import CardContainerComponent from "./CardContainer";
 
 const WrapperListContainer = () => {
   const [parent] = useAutoAnimate();
 
-  const { containers, status, error } = useSelector(
-    (state: RootState) => state.container
-  );
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchContainer());
+  }, [dispatch]);
+
+  const { containers, status, error } = useSelector((state: RootState) => state.container);
 
   if (status === "loading" || status === "idle")
     return (
@@ -30,9 +35,13 @@ const WrapperListContainer = () => {
     <>
       <div className="w-full flex justify-center">
         <div ref={parent} className="w-full md:w-3/5 p-3 md:p-4 mb-4">
-          {containers.map((container, i) => (
-            <CardContainerComponent key={i} container={container} />
-          ))}
+          {containers.length > 0 ? (
+            containers.map((container, i) => <CardContainerComponent key={i} container={container} />)
+          ) : (
+            <div className="w-full h-calc-screen-minus-160 flex justify-center items-center">
+              <h2 className="text-xl text-center">Container is empty</h2>
+            </div>
+          )}
         </div>
       </div>
     </>

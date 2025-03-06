@@ -11,7 +11,6 @@ import { loadColorTheme } from "@/redux/slice/color.slice";
 import { setColorTheme } from "@/lib/color-themes";
 import { loadSort } from "@/redux/slice/sort.slice";
 import { loadCurrency } from "@/redux/slice/currency.slice";
-import { fetchContainer } from "@/redux/slice/container.slice";
 
 export default function GlobalLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -34,7 +33,6 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     dispatch(loadSort());
     dispatch(loadCurrency());
     dispatch(loadColorTheme());
-    dispatch(fetchContainer());
     setColorTheme(colorTheme, theme);
   }, [dispatch, colorTheme, theme]);
 

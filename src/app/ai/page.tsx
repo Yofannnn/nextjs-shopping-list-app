@@ -5,11 +5,14 @@ import AddNewItemsFromAiComponent from "@/components/fragments/AddNewItemsFromAi
 import AIFormComponents from "@/components/fragments/AIFormComponents";
 import MarkdownIt from "markdown-it";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ListPlusIcon } from "lucide-react";
 import { checkListFromAI } from "@/lib/check-list-form-ai";
 import { HyperText } from "@/components/ui/hyper-text";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { fetchContainer } from "@/redux/slice/container.slice";
 
 interface Chat {
   role: "user" | "assistant";
@@ -22,19 +25,30 @@ export default function AssistantPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemsAddToContainer, setItemsAddToContainer] = useState<string[]>([]);
   const [mount, setMount] = useState(false);
-
+  const dispatch: AppDispatch = useDispatch();
   const md = new MarkdownIt();
   const [parent] = useAutoAnimate();
+
+  const containerChat = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerChat.current) containerChat.current.scrollTop = containerChat.current.scrollHeight;
+  }, [chat]);
 
   useEffect(() => {
     const localChat = JSON.parse(sessionStorage.getItem("chat") || "[]");
     setChat(localChat);
     setMount(true);
-  }, []);
+
+    dispatch(fetchContainer());
+  }, [dispatch]);
 
   return (
     <>
-      <div className="w-full h-calc-screen-minus-80 overflow-y-auto px-2 sm:px-14 md:px-20 xl:px-36">
+      <div
+        ref={containerChat}
+        className="w-full h-calc-screen-minus-80 overflow-y-auto px-2 sm:px-14 md:px-20 xl:px-36"
+      >
         {!mount ? (
           <Loader />
         ) : (
@@ -44,7 +58,7 @@ export default function AssistantPage() {
             ) : (
               chat.map((item, i) => {
                 return item.status === "loading" ? (
-                  <AILoader />
+                  <AILoader key={i} />
                 ) : (
                   <div key={i}>
                     <div

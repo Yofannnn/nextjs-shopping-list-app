@@ -63,7 +63,7 @@ const AIFormComponents = ({
         }),
       });
 
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) throw new Error((await response.json()).statusText);
 
       const reader = response.body?.getReader();
       if (!reader) return;
